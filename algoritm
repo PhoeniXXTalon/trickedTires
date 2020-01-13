@@ -1,0 +1,28 @@
+o_tire_width = float(input("Factory tire width (in millimeters): "))
+o_aspect_ratio = float(input("Factory aspect ratio: "))
+o_wheel_diameter = float(input("Factory wheel diameter (in inches): "))
+
+n_tire_width = float(input("New tire width (in millimeters): "))
+n_aspect_ratio = float(input("New aspect ratio: "))
+n_wheel_diameter = float(input("New wheel diameter (in inches): "))
+
+o_width_in = o_tire_width / 25.4
+n_width_in = n_tire_width / 25.4
+
+n_sidewall = (n_aspect_ratio * 0.01) * n_width_in
+o_sidewall = (o_aspect_ratio * 0.01) * o_width_in
+
+o_full_diameter = (o_sidewall + o_wheel_diameter)
+n_full_diameter = (n_sidewall + n_wheel_diameter)
+
+increase_acc = n_full_diameter > o_full_diameter
+
+if increase_acc:
+    increase = n_full_diameter - o_full_diameter
+    percent_increase = (increase / o_full_diameter) * 100
+    print(str(percent_increase) + "% inaccuracy")
+else:
+    decrease = o_full_diameter - n_full_diameter
+    percent_decrease = (decrease / o_full_diameter) * 100
+    print(str(percent_decrease) + "% inaccuracy")
+    
