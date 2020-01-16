@@ -23,6 +23,8 @@ if increase_acc:
     print(str(percent_increase) + "% inaccuracy")
 else:
     decrease = o_full_diameter - n_full_diameter
-    percent_decrease = (decrease / o_full_diameter) * 100
+    percent_decrease = (decrease / o_full_diameter) * 100 
     print(str(percent_decrease) + "% inaccuracy")
-    
+
+speed = float(input("What speed would you like to check? "))
+print("When your car's speedometer reads " + str(speed) + "MPH, the car is actually traveling " + str((n_full_diameter / o_full_diameter) * speed) + " MPH.")
