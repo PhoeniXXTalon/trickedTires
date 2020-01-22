@@ -1,30 +1,48 @@
+# old tire input
 o_tire_width = float(input("Factory tire width (in millimeters): "))
 o_aspect_ratio = float(input("Factory aspect ratio: "))
 o_wheel_diameter = float(input("Factory wheel diameter (in inches): "))
 
+# new tire input
 n_tire_width = float(input("New tire width (in millimeters): "))
 n_aspect_ratio = float(input("New aspect ratio: "))
 n_wheel_diameter = float(input("New wheel diameter (in inches): "))
 
+# convert to inches
 o_width_in = o_tire_width / 25.4
 n_width_in = n_tire_width / 25.4
 
+# calculates sidewall
 n_sidewall = (n_aspect_ratio * 0.01) * n_width_in
 o_sidewall = (o_aspect_ratio * 0.01) * o_width_in
 
+# true diameter of old and new tires
 o_full_diameter = (o_sidewall + o_wheel_diameter)
 n_full_diameter = (n_sidewall + n_wheel_diameter)
 
+# calculates circumferences
+o_circumference = (o_full_diameter * 3.1415)
+n_circumference = (n_full_diameter * 3.1415)
+
+# calculates whether it increases the tire size or decreases it
 increase_acc = n_full_diameter > o_full_diameter
 
+# calculates % inaccuracy and % change of circumference
 if increase_acc:
     increase = n_full_diameter - o_full_diameter
     percent_increase = (increase / o_full_diameter) * 100
     print(str(percent_increase) + "% inaccuracy")
+    cir_increase = n_circumference - o_circumference
+    circumference_percent = (cir_increase / o_circumference) * 100
 else:
     decrease = o_full_diameter - n_full_diameter
     percent_decrease = (decrease / o_full_diameter) * 100 
     print(str(percent_decrease) + "% inaccuracy")
+    cir_decrease = o_circumference - n_circumference
+    circumference_percent = (cir_decrease / o_circumference) * 100
 
-speed = float(input("What speed would you like to check? "))
-print("When your car's speedometer reads " + str(speed) + "MPH, the car is actually traveling " + str((n_full_diameter / o_full_diameter) * speed) + " MPH.")
+# test with given values
+speed = float(input("What speed would you like to check? (speedometer) "))
+distance = float(input("What distance would you like to check? (odometer) "))
+print("When your car's speedometer reads " + str(speed) + " MPH, the car is actually traveling " + str((n_full_diameter / o_full_diameter) * speed) + " MPH.")
+print("When your car's odometer reads " + str(distance) + " miles, the car actually traveled " + str((n_circumference / o_circumference) * distance) + " miles.")
